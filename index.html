@@ -11,7 +11,40 @@
 <body>
   
   <!-- HEADER -->
-  <div id="header-container"></div>
+  <header>
+
+    <!-- Firebase App + Auth -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+    <a href="https://javidei.github.io/" style="text-decoration: none;">
+      <h2 class="favicon-header">
+        <img src="logoStilton.png" alt="Logo" class="favicon-img" /> Librería Stilton
+      </h2>
+    </a>
+    <p>Descubre libros, ideas y cosas que me inspiran cada día</p>
+    <form id="form-busqueda" style="margin-top: 1rem;">
+      <input type="text" id="input-busqueda" class="campo-busqueda" placeholder="Buscar libros..." />
+      <button type="submit" class="btn-buscar">Buscar</button>
+    </form>
+   
+
+    <div id="usuario-info" class="usuario-info" style="position: absolute; top: 1rem; right: 1rem;">
+      <span id="nombre-usuario"></span>
+      <button id="btn-login" class="btn btn-sm btn-outline-dark">Iniciar sesión</button>
+      <button id="btn-logout" class="btn btn-sm btn-outline-danger" style="display:none;">Salir</button>
+    </div>
+
+    <div id="pestanas-header" style="position: absolute; bottom: 0.5rem; left: 1rem; display: flex; gap: 0.5rem; z-index: 1000;">
+      <button type="button" id="idPgDetalle" class="btn btn-sm" style="background-color: #ffc107; color: #000;">Películas</button>
+      <button class="btn btn-sm" style="background-color: #0d6efd; color: #fff;">Pestaña 1</button>
+      <button class="btn btn-sm" style="background-color: #dc3545; color: #fff;">Pestaña 2</button>
+      <button class="btn btn-sm" style="background-color: #198754; color: #fff;">Pestaña 3</button>
+      <button class="btn btn-sm" style="background-color: #6f42c1; color: #fff;">Pestaña 4</button>
+    </div>
+
+  </header>
+
 
   <main>
     <!-- Controles de paginación arriba -->
@@ -25,8 +58,9 @@
       <section class="galeria" id="galeria"></section>
     </div>
   </main>
+  
   <!-- FOOTER -->
-  <div id="footer-container"></div>
+ <div id="footer-container"></div>
 
   <!-- VENTANA MODAL DE REGISTRO BONITA -->
   <div id="modal-auth" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1050; align-items: center; justify-content: center;">
@@ -220,25 +254,6 @@
         nombreUsuario.textContent = '';
         btnLogin.style.display = 'inline-block';
         btnLogout.style.display = 'none';
-      }
-    });
-
-    fetch("header.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("header-container").innerHTML = html;
-
-      // 🔽 Aquí ya existe el form, ahora sí puedes hacer esto:
-      const form = document.getElementById('form-busqueda');
-      if (form) {
-        form.addEventListener('submit', e => {
-          e.preventDefault();
-          const query = document.getElementById('input-busqueda').value.trim();
-          if (query) {
-            paginaActual = 0;
-            buscarLibros(query, 0);
-          }
-        });
       }
     });
 
